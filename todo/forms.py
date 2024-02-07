@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Task
-
+import datetime
+from django.forms import DateInput
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Addres'}))
     first_name = forms.CharField(label="", max_length=50 ,widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name'}))
@@ -30,3 +31,15 @@ class SignUpForm(UserCreationForm):
             self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
             self.fields['password2'].label = ''
             self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
+
+
+class AddTask(forms.ModelForm):
+    # title = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Title","class":"form-control"}), label="")
+    # description = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Description","class":"form-control "}), label="")
+    # due_date = forms.DateTimeField(required=True, widget=forms.DateInput(attrs={'class': 'form-select'}),label="", initial=datetime.datetime.now)
+    # status = forms.ChoiceField(required=True, choices=Task.STATUS_CHOICES, widget=forms.Select(attrs={'class':'form-select'}), label='', initial=Task.STATUS_CHOICES[2][0])
+
+    class Meta:
+        model = Task
+        fields ='__all__'
+        widgets = {'due_date': DateInput( format=('%Y-%m-%d'),attrs={'type': 'date' }),}

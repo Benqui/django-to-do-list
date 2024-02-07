@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .models import Task
-from .forms import SignUpForm
+from .forms import SignUpForm, AddTask
 
 
 # Create your views here.
@@ -44,3 +44,14 @@ def register_usr(request):
         form = SignUpForm()
         # return redirect(request,'register.html',{'form':form})
     return render(request,'register.html',{'form':form})
+
+def add_task(request):
+    form = AddTask(request.POST or None)
+    if request.user.is_authenticated:
+        if form.is_valid():
+            add_record = form.save()
+            messages.success(request,"Tarea agregada :)")
+            return redirect('home')
+        return render(request, 'add_task.html',{'form':form})
+    else:
+        return redirect('home')
