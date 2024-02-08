@@ -55,3 +55,32 @@ def add_task(request):
         return render(request, 'add_task.html',{'form':form})
     else:
         return redirect('home')
+    
+def edit_task(request,pk):
+    if request.user.is_authenticated:
+        current = Task.objects.get(id=pk)
+        form = AddTask(request.POST or None, instance=current)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+        return render(request,'edit_task.html',{'form':form})
+    else:
+        messages.success(request,"No tas loggiado vete de aqui quien eres")
+        return redirect('home')
+
+def tasko(request,pk):
+    if request.user.is_authenticated:
+        current_task = Task.objects.get(id=pk)
+        return render(request,'task.html',{'tasko':current_task})
+    else:
+        messages.success(request,"No tas loggiado vete de aqui quien eres")
+        return redirect('home')
+        
+def del_task(request,pk):
+    if request.user.is_authenticated:
+        delete_task = Task.objects.get(id=pk)
+        delete_task.delete()
+        return redirect('home')
+    else:
+        messages.success(request,"No tas loggiado vete de aqui quien eres")
+        return redirect('home')

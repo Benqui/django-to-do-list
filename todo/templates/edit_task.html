@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="col-md-6 offset-md-3"> 
+    <h1>Add Task</h1>
+    <br>
+    <form method="POST" >
+        {% csrf_token %}
+        {{form | crispy}}
+        <br>
+        <button type="submit" class="btn btn-success">Add Task</button>
+        <a href="{% url "home" %}" class="btn btn-outline-primary">Go Back</a>
+    </form>
+</div>
+{% endif %}
+
+{% endblock content %}
+
+

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="card" style="background-color: #D9A05B;">
+    <div class="card-header">
+        <h1>{{tasko.first_name}} {{tasko.last_name}}</h1>
+    </div>
+    <div class="card-body">
+        <h5 class="card-text"><strong>Title: </strong>{{tasko.title}}</h5>
+        <h5 class="card-text"><strong>Status: </strong>{{tasko.status}}</h5>
+        <h5 class="card-text"><strong>Created: </strong>{{tasko.date_created}}</h5>
+        <h5 class="card-text"><strong>Due date: </strong>{{tasko.due_date}}.</h5>
+        <h5 class="card-text"><strong>Description: </strong>{{tasko.description}}</h5>
+        <h5 class="card-title"><strong>ID: </strong> {{tasko.id}}</h5>
+      <div class="card-footer"style="background-color: #F2F2F2">
+          <a href="{% url "home" %}" class="btn btn-info">Go Back</a>
+          <a href="{% url "edit_task" tasko.id %}" class="btn btn-secondary">Edit</a>
+          <a href="{% url "del_task" tasko.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

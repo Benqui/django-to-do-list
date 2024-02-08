@@ -1,22 +1,28 @@
 /* static/css/styles.css */
 
 .custom-table {
-    --bs-table-bg: #f0ad4e;
+    --bs-table-bg: #F28B30;
     /* Change table background color */
     --bs-table-border-color: #ddd;
     /* Customize border color */
-    --bs-table-color: #000000;
+    --bs-table-color: #F2F2F2;
     /* Fallback color */
     border-radius: 20px;
     overflow: hidden;
 }
 
 
-/* td.custom-td{
-    background: #1d2594 !important;
-
-}
-th.custom-th{
-    background: #1d2594 !important;
-
+/* .card {
+    background-color: #D9A05B;
 } */
+
+
+/*  
+* *Colores
+*  #117DBF
+*  #118EBF
+*  #D9A05B
+*  #F28B30
+*  #F2F2F2
+
+ */

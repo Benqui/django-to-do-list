@@ -12,7 +12,7 @@
     <thead>
       <tr>
           <th scope="col">Title</th>
-          <th scope="col">Desc. </th>
+          <th scope="col">Description </th>
           <th scope="col">Created</th>
           <th scope="col">Status</th>
           <th scope="col">Due date</th>
@@ -26,9 +26,18 @@
         <td>{{task.title}}</td>
         <td>{{task.description | truncatewords:10}}</td>
         <td>{{task.date_created}}</td>
-        <td>{{task.status}}</td>
+        {% comment %} <td>{{task.status}}</td> {% endcomment %}
+        <td>
+          {% if task.status == 'TO DO' %}
+            <span class="badge brounded-pill text-bg-secondary">{{ task.status }}</span>
+          {% elif task.status == 'COMPLETED' %}
+          <span class="badge rounded-pill text-bg-primary">{{ task.status }}</span>
+          {% elif task.status == 'IN-PROGRESS' %}
+          <span class="badge rounded-pill text-bg-warning">{{ task.status }}</span>
+          {% endif %}
+        </td>
         <td>{{task.due_date}}</td>
-        <td><a href="#"  class="btn btn-outline-secondary">{{task.id}}</a></td>
+        <td><a href="{% url "task" task.id %}"  class="btn btn-primary">{{task.id}}</a></td>
       </tr>
         {% endfor %}
         {% endif %}        
